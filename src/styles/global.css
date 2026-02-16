@@ -1,0 +1,101 @@
+/* ============================================================
+   tokens.css — StockFlow
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap");
+
+/* ── LIGHT MODE (padrão) ───────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  /* Primary */
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-primary-subtle: #eef2ff;
+
+  /* Secondary */
+  --color-secondary: #8b5cf6;
+  --color-secondary-hover: #7c3aed;
+  --color-secondary-subtle: #f5f3ff;
+
+  /* Success */
+  --color-success: #10b981;
+  --color-success-subtle: #d1fae5;
+
+  /* Warning */
+  --color-warning: #f59e0b;
+  --color-warning-subtle: #fef3c7;
+
+  /* Danger */
+  --color-danger: #ef4444;
+  --color-danger-subtle: #fee2e2;
+
+  /* Superfícies */
+  --color-bg: #f9fafb;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f3f4f6;
+
+  /* Bordas */
+  --color-border: #e5e7eb;
+
+  /* Texto */
+  --color-text: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
+  --color-text-inverse: #ffffff;
+
+  /* Fontes */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: "Poppins", system-ui, -apple-system, sans-serif;
+}
+
+/* ── DARK MODE ─────────────────────────────────────────────── */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Primary */
+  --color-primary: #818cf8;
+  --color-primary-hover: #6366f1;
+  --color-primary-subtle: #1e1b4b;
+
+  /* Secondary */
+  --color-secondary: #a78bfa;
+  --color-secondary-hover: #8b5cf6;
+  --color-secondary-subtle: #2e1065;
+
+  /* Success */
+  --color-success: #34d399;
+  --color-success-subtle: #064e3b;
+
+  /* Warning */
+  --color-warning: #fbbf24;
+  --color-warning-subtle: #78350f;
+
+  /* Danger */
+  --color-danger: #f87171;
+  --color-danger-subtle: #7f1d1d;
+
+  /* Superfícies */
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-raised: #263348;
+
+  /* Bordas */
+  --color-border: #334155;
+
+  /* Texto */
+  --color-text: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  --color-text-inverse: #0f172a;
+}
+
+/* ── BODY ──────────────────────────────────────────────────── */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}

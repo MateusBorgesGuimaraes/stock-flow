@@ -1,0 +1,121 @@
+/* ============================================================
+   reset.css
+   Reset moderno — Vite + React + CSS Modules
+   Baseado em: Josh Comeau's CSS Reset + Andy Bell's Modern Reset
+   ============================================================ */
+
+/* 1. Box-sizing global */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove margens e paddings padrão */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Raiz — facilita cálculos rem e scroll suave */
+:root {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 4. Body — altura mínima, renderização de fonte e line-height base */
+body {
+  min-height: 100dvh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
+
+/* 5. Mídia — sem overflow por padrão */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inputs herdam fonte do body */
+input,
+button,
+textarea,
+select,
+optgroup {
+  font: inherit;
+  color: inherit;
+}
+
+/* 7. Sem estilo nativo de button */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 8. Textos longos quebram corretamente */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Listas sem estilo (quando usadas com role="list") */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* 10. Links sem sublinhado por padrão */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 11. Tabelas sem espaço extra */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 12. Root do React — ocupa a tela toda */
+#root {
+  min-height: 100dvh;
+  isolation: isolate;
+}
+
+/* 13. Foco visível acessível — remove o outline feio,
+       mantém para teclado */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* 14. Respeita preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
