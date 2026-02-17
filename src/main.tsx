@@ -4,9 +4,12 @@ import { RouterProvider } from "@tanstack/react-router";
 import { router } from "./router";
 import "./styles/reset.css";
 import "./styles/global.css";
+import { ThemeProvider } from "./context/themeProvider";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>,
 );
