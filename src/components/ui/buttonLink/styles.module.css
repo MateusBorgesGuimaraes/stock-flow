@@ -4,14 +4,22 @@
   gap: 8px;
   font-weight: 500;
   font-family: var(--font-body);
-  font-size: 14px;
-  padding: 10px 20px;
   border-radius: 12px;
   cursor: pointer;
   border: none;
   transition: all 0.2s var(--ease);
   text-decoration: none;
   white-space: nowrap;
+}
+
+.btnMd {
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+.btnLg {
+  font-size: 15px;
+  padding: 14px 28px;
 }
 
 .btnGhost {
@@ -33,4 +41,18 @@
   background: var(--color-primary-hover);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px var(--color-primary-glow);
+}
+
+.btnOutline {
+  background: transparent;
+  color: var(--color-text);
+  border: 1.5px solid var(--color-border);
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 12px;
+}
+.btnOutline:hover {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
