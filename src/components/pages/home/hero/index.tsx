@@ -1,5 +1,6 @@
 import AnnoucementBadge from "../../../ui/annoucementBadge";
 import ButtonLink from "../../../ui/buttonLink";
+import DashboardPreview from "../../../ui/dashboardPreview";
 import styles from "./styles.module.css";
 
 export default function Hero() {
@@ -42,6 +43,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
+      <DashboardPreview />
     </section>
   );
 }
