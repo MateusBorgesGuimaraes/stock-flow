@@ -1,4 +1,4 @@
-import AnnoucementBadge from "../../../ui/annoucementBadge";
+import SectionBadge from "../../../ui/sectionBadge";
 import ButtonLink from "../../../ui/buttonLink";
 import DashboardPreview from "../../../ui/dashboardPreview";
 import styles from "./styles.module.css";
@@ -8,7 +8,10 @@ export default function Hero() {
     <section className={styles.hero}>
       <div className={styles.heroBg}></div>
       <div className={styles.heroContent}>
-        <AnnoucementBadge />
+        <SectionBadge>
+          Novo: Dashboard com IA em tempo real
+          <span>→</span>
+        </SectionBadge>
         <h1 className={styles.heroTitle}>
           Gestão de estoque
           <br />

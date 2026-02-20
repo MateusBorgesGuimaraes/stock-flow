@@ -1,11 +1,14 @@
 import styles from "./styles.module.css";
 
-export default function AnnoucementBadge() {
+type SectionBadgeProps = {
+  children: React.ReactNode;
+};
+
+export default function SectionBadge({ children }: SectionBadgeProps) {
   return (
     <div className={styles.heroBadge}>
       <span className={styles.heroBadgeDot}></span>
-      Novo: Dashboard com IA em tempo real
-      <span>→</span>
+      {children}
     </div>
   );
 }

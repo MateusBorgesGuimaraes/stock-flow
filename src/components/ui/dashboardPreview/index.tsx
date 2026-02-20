@@ -1,3 +1,4 @@
+import Badge from "../badge";
 import styles from "./styles.module.css";
 
 export default function DashboardPreview() {
@@ -161,11 +162,7 @@ export default function DashboardPreview() {
                     <td className={styles.tdName}>Notebook Dell Inspiron</td>
                     <td>15</td>
                     <td>
-                      <span
-                        className={`${styles.badge} ${styles.badgeSuccess}`}
-                      >
-                        ✓ Em estoque
-                      </span>
+                      <Badge text="Em estoque" variant="success" />
                     </td>
 
                     <td>
@@ -202,13 +199,8 @@ export default function DashboardPreview() {
                     <td className={styles.tdName}>Mouse Logitech MX</td>
                     <td>5</td>
                     <td>
-                      <span
-                        className={`${styles.badge} ${styles.badgeWarning}`}
-                      >
-                        ⚠ Baixo
-                      </span>
+                      <Badge text="Baixo" variant="warning" />
                     </td>
-
                     <td>
                       <div className={styles.chartBars}>
                         <div
@@ -243,9 +235,7 @@ export default function DashboardPreview() {
                     <td className={styles.tdName}>Teclado Mecânico K3</td>
                     <td>0</td>
                     <td>
-                      <span className={`${styles.badge} ${styles.badgeDanger}`}>
-                        ✕ Esgotado
-                      </span>
+                      <Badge text="Esgotado" variant="danger" />
                     </td>
 
                     <td>

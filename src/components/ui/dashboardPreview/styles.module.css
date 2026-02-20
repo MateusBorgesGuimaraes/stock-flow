@@ -311,39 +311,6 @@ tr:hover td {
   font-weight: 500;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border-radius: 99999px;
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.badgeSuccess {
-  background: color-mix(
-    in srgb,
-    var(--color-success) 15%,
-    var(--color-surface)
-  );
-  color: var(--color-success);
-}
-
-.badgeWarning {
-  background: color-mix(
-    in srgb,
-    var(--color-warning) 15%,
-    var(--color-surface)
-  );
-  color: var(--color-warning);
-}
-
-.badgeDanger {
-  background: color-mix(in srgb, var(--color-danger) 15%, var(--color-surface));
-  color: var(--color-danger);
-}
-
 .tdActions {
   display: flex;
   gap: 6px;

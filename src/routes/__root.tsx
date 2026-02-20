@@ -5,7 +5,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <Header />
-      {/*<h1>StockFlow</h1>*/}
+      <div className="app-bg" />
       <Outlet />
     </>
   ),
