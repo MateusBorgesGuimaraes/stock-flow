@@ -1,0 +1,41 @@
+.pricing {
+  padding: 24px 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionBadge {
+  margin-bottom: 24px;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fade-up 0.7s var(--ease) both;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text);
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.sectionSubtitle {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto 60px;
+}
