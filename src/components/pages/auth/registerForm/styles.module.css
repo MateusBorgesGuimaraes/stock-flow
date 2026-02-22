@@ -1,0 +1,33 @@
+@import "../loginForm/styles.module.css";
+
+.helperText {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+  margin-top: 4px;
+}
+
+.termsGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: -8px;
+}
+
+.termsLabel {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.5;
+}
+
+.termsLabel a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.termsLabel a:hover {
+  color: var(--color-primary-hover);
+}
