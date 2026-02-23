@@ -1,29 +1,33 @@
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./styles.module.css";
+import {
+  loginSchema,
+  type LoginFormData,
+} from "../../../../schemas/login.schema";
+import { FormInput } from "../../../ui/form/formInput";
+import { FormCheckbox } from "../../../ui/form/formCheckbox";
+import { FormButton } from "../../../ui/form/formButton/formButton";
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      remember: false,
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    setIsLoading(true);
+  const onSubmit = async (data: LoginFormData) => {
+    console.log("Login:", data);
 
-    try {
-      console.log("Login:", { email, password, remember });
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    } catch (err) {
-      setError("Email ou senha incorretos");
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
   return (
@@ -37,65 +41,38 @@ export function LoginForm() {
         <span>//</span>
       </div>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <label htmlFor="email" className={styles.label}>
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className={styles.input}
-            placeholder="seu@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <FormInput
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="seu@email.com"
+          register={register}
+          error={errors.email}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="password" className={styles.label}>
-            Senha
-          </label>
-          <input
-            type="password"
-            id="password"
-            className={`${styles.input} ${error ? styles.error : ""}`}
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          {error && <span className={styles.errorMessage}>⚠ {error}</span>}
-        </div>
+        <FormInput
+          label="Senha"
+          name="password"
+          type="password"
+          placeholder="••••••••"
+          register={register}
+          error={errors.password}
+        />
 
         <div className={styles.helper}>
-          <div className={styles.checkboxGroup}>
-            <input
-              type="checkbox"
-              id="remember"
-              className={styles.checkbox}
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
-            />
-            <label htmlFor="remember" className={styles.checkboxLabel}>
-              Lembrar de mim
-            </label>
-          </div>
+          <FormCheckbox
+            name="remember"
+            label="Lembrar de mim"
+            register={register}
+          />
 
           <Link to="/" className={styles.link}>
             Esqueci minha senha
           </Link>
         </div>
 
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={isLoading}
-        >
-          {isLoading ? "Entrando..." : "Entrar"}
-          {!isLoading && <span>→</span>}
-        </button>
+        <FormButton isLoading={isSubmitting}>Entrar</FormButton>
       </form>
     </>
   );

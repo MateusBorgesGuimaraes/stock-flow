@@ -25,10 +25,10 @@ export default function Header() {
 
       <div className={styles.navActions}>
         <ThemeButton />
-        <ButtonLink link="#" variant="ghost">
+        <ButtonLink link="/login" variant="ghost">
           Entrar
         </ButtonLink>
-        <ButtonLink link="#">Começar grátis</ButtonLink>
+        <ButtonLink link="/register">Começar grátis</ButtonLink>
       </div>
     </nav>
   );

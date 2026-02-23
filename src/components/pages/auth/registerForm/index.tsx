@@ -1,36 +1,34 @@
-import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./styles.module.css";
+import {
+  registerSchema,
+  type RegisterFormData,
+} from "../../../../schemas/register.schema";
+import { FormInput } from "../../../ui/form/formInput";
+import { FormCheckbox } from "../../../ui/form/formCheckbox";
+import { FormButton } from "../../../ui/form/formButton/formButton";
 
 export function RegisterForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [terms, setTerms] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      terms: false,
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
+  const onSubmit = async (data: RegisterFormData) => {
+    console.log("Register:", data);
 
-    if (!terms) {
-      setError("Você precisa aceitar os termos de uso");
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      console.log("Register:", { name, email, password });
-
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    } catch (err) {
-      setError("Erro ao criar conta. Tente novamente.");
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
   return (
@@ -44,79 +42,47 @@ export function RegisterForm() {
         <span>//</span>
       </div>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.formGroup}>
-          <label htmlFor="name" className={styles.label}>
-            Nome completo
-          </label>
-          <input
-            type="text"
-            id="name"
-            className={styles.input}
-            placeholder="João Silva"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <FormInput
+          label="Nome completo"
+          name="name"
+          placeholder="João Silva"
+          register={register}
+          error={errors.name}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="email" className={styles.label}>
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className={styles.input}
-            placeholder="seu@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+        <FormInput
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="seu@email.com"
+          register={register}
+          error={errors.email}
+        />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="password" className={styles.label}>
-            Senha
-          </label>
-          <input
-            type="password"
-            id="password"
-            className={styles.input}
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={8}
-          />
-          <span className={styles.helperText}>Mínimo 8 caracteres</span>
-        </div>
+        <FormInput
+          label="Senha"
+          name="password"
+          type="password"
+          placeholder="••••••••"
+          register={register}
+          error={errors.password}
+        />
 
         <div className={styles.termsGroup}>
-          <input
-            type="checkbox"
-            id="terms"
-            className={styles.checkbox}
-            checked={terms}
-            onChange={(e) => setTerms(e.target.checked)}
-            required
+          <FormCheckbox
+            name="terms"
+            label="Aceito os termos de uso e política de privacidade"
+            register={register}
           />
-          <label htmlFor="terms" className={styles.termsLabel}>
-            Aceito os <a href="/terms">termos de uso</a> e{" "}
-            <a href="/privacy">política de privacidade</a>
-          </label>
+          {errors.terms && (
+            <span className={styles.errorMessage}>
+              ⚠ {errors.terms.message}
+            </span>
+          )}
         </div>
 
-        {error && <span className={styles.errorMessage}>⚠ {error}</span>}
-
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={isLoading}
-        >
-          {isLoading ? "Criando conta..." : "Criar conta grátis"}
-          {!isLoading && <span>→</span>}
-        </button>
+        <FormButton isLoading={isSubmitting}>Criar conta grátis</FormButton>
       </form>
     </>
   );
