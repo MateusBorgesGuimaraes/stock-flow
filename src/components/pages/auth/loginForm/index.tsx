@@ -9,12 +9,14 @@ import {
 import { FormInput } from "../../../ui/form/formInput";
 import { FormCheckbox } from "../../../ui/form/formCheckbox";
 import { FormButton } from "../../../ui/form/formButton/formButton";
+import { useLogin } from "../../../../hooks/useLogin";
 
 export function LoginForm() {
+  const { mutate: login, isPending } = useLogin();
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -25,9 +27,10 @@ export function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    console.log("Login:", data);
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    login({
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (
@@ -72,7 +75,7 @@ export function LoginForm() {
           </Link>
         </div>
 
-        <FormButton isLoading={isSubmitting}>Entrar</FormButton>
+        <FormButton isLoading={isPending}>Entrar</FormButton>
       </form>
     </>
   );

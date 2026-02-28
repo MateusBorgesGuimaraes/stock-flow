@@ -1,20 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "../services/auth.service";
+import { useAuthStore } from "../stores/useAuthStore";
+import { useNavigate } from "@tanstack/react-router";
+import axios from "axios";
+import { toast } from "sonner";
 
 export function useRegister() {
+  const setUser = useAuthStore((state) => state.setUser);
+  const navigate = useNavigate();
+
   return useMutation({
     mutationFn: registerUser,
 
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
-
-      // redirecionar para home, atualizar contexto, etc.
+      setUser(data.user);
+      navigate({ to: "/" });
     },
 
     onError: (error: any) => {
-      console.error("Erro no cadastro:", error?.response?.data?.message);
-      //toat com erro
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message ?? "Erro ao criar conta");
+      }
     },
   });
 }

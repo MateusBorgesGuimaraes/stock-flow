@@ -9,12 +9,15 @@ import {
 import { FormInput } from "../../../ui/form/formInput";
 import { FormCheckbox } from "../../../ui/form/formCheckbox";
 import { FormButton } from "../../../ui/form/formButton/formButton";
+import { useRegister } from "../../../../hooks/useRegister";
 
 export function RegisterForm() {
+  const { mutate: registerUser, isPending } = useRegister();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -26,9 +29,11 @@ export function RegisterForm() {
   });
 
   const onSubmit = async (data: RegisterFormData) => {
-    console.log("Register:", data);
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    registerUser({
+      email: data.email,
+      name: data.name,
+      password: data.password,
+    });
   };
 
   return (
@@ -82,7 +87,7 @@ export function RegisterForm() {
           )}
         </div>
 
-        <FormButton isLoading={isSubmitting}>Criar conta grátis</FormButton>
+        <FormButton isLoading={isPending}>Criar conta grátis</FormButton>
       </form>
     </>
   );
