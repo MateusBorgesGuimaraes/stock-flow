@@ -16,7 +16,11 @@ export function useRegister() {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       setUser(data.user);
-      navigate({ to: "/" });
+      if (!data.user.companyId) {
+        navigate({ to: "/criar-empresa" });
+      } else {
+        navigate({ to: "/dashboard" });
+      }
     },
 
     onError: (error: any) => {

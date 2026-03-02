@@ -13,10 +13,15 @@ export function useLogin() {
     mutationFn: loginUser,
 
     onSuccess: (data) => {
-      localStorage.setItem("accesToken", data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
+      console.log("data", data);
       setUser(data.user);
-      navigate({ to: "/" });
+      if (!data.user.companyId) {
+        navigate({ to: "/criar-empresa" });
+      } else {
+        navigate({ to: "/dashboard" });
+      }
     },
 
     onError: (error) => {

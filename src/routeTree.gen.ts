@@ -9,15 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedCriarEmpresaRouteImport } from './routes/_authenticated/criar-empresa'
 import { Route as AuthRegisterRouteImport } from './routes/_auth/register'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthenticatedHasCompanyRouteRouteImport } from './routes/_authenticated/_has-company/route'
+import { Route as AuthenticatedHasCompanyProdutosRouteImport } from './routes/_authenticated/_has-company/produtos'
+import { Route as AuthenticatedHasCompanyPlanosRouteImport } from './routes/_authenticated/_has-company/planos'
+import { Route as AuthenticatedHasCompanyEmpresaRouteImport } from './routes/_authenticated/_has-company/empresa'
+import { Route as AuthenticatedHasCompanyDashboardRouteImport } from './routes/_authenticated/_has-company/dashboard'
 
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCriarEmpresaRoute =
+  AuthenticatedCriarEmpresaRouteImport.update({
+    id: '/criar-empresa',
+    path: '/criar-empresa',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
   id: '/_auth/register',
   path: '/register',
@@ -28,45 +45,133 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedHasCompanyRouteRoute =
+  AuthenticatedHasCompanyRouteRouteImport.update({
+    id: '/_has-company',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedHasCompanyProdutosRoute =
+  AuthenticatedHasCompanyProdutosRouteImport.update({
+    id: '/produtos',
+    path: '/produtos',
+    getParentRoute: () => AuthenticatedHasCompanyRouteRoute,
+  } as any)
+const AuthenticatedHasCompanyPlanosRoute =
+  AuthenticatedHasCompanyPlanosRouteImport.update({
+    id: '/planos',
+    path: '/planos',
+    getParentRoute: () => AuthenticatedHasCompanyRouteRoute,
+  } as any)
+const AuthenticatedHasCompanyEmpresaRoute =
+  AuthenticatedHasCompanyEmpresaRouteImport.update({
+    id: '/empresa',
+    path: '/empresa',
+    getParentRoute: () => AuthenticatedHasCompanyRouteRoute,
+  } as any)
+const AuthenticatedHasCompanyDashboardRoute =
+  AuthenticatedHasCompanyDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedHasCompanyRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/criar-empresa': typeof AuthenticatedCriarEmpresaRoute
+  '/dashboard': typeof AuthenticatedHasCompanyDashboardRoute
+  '/empresa': typeof AuthenticatedHasCompanyEmpresaRoute
+  '/planos': typeof AuthenticatedHasCompanyPlanosRoute
+  '/produtos': typeof AuthenticatedHasCompanyProdutosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof AuthLoginRoute
   '/register': typeof AuthRegisterRoute
+  '/criar-empresa': typeof AuthenticatedCriarEmpresaRoute
+  '/dashboard': typeof AuthenticatedHasCompanyDashboardRoute
+  '/empresa': typeof AuthenticatedHasCompanyEmpresaRoute
+  '/planos': typeof AuthenticatedHasCompanyPlanosRoute
+  '/produtos': typeof AuthenticatedHasCompanyProdutosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_authenticated/_has-company': typeof AuthenticatedHasCompanyRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/register': typeof AuthRegisterRoute
+  '/_authenticated/criar-empresa': typeof AuthenticatedCriarEmpresaRoute
+  '/_authenticated/_has-company/dashboard': typeof AuthenticatedHasCompanyDashboardRoute
+  '/_authenticated/_has-company/empresa': typeof AuthenticatedHasCompanyEmpresaRoute
+  '/_authenticated/_has-company/planos': typeof AuthenticatedHasCompanyPlanosRoute
+  '/_authenticated/_has-company/produtos': typeof AuthenticatedHasCompanyProdutosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/criar-empresa'
+    | '/dashboard'
+    | '/empresa'
+    | '/planos'
+    | '/produtos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register'
-  id: '__root__' | '/' | '/_auth/login' | '/_auth/register'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/criar-empresa'
+    | '/dashboard'
+    | '/empresa'
+    | '/planos'
+    | '/produtos'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/_authenticated/_has-company'
+    | '/_auth/login'
+    | '/_auth/register'
+    | '/_authenticated/criar-empresa'
+    | '/_authenticated/_has-company/dashboard'
+    | '/_authenticated/_has-company/empresa'
+    | '/_authenticated/_has-company/planos'
+    | '/_authenticated/_has-company/produtos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/criar-empresa': {
+      id: '/_authenticated/criar-empresa'
+      path: '/criar-empresa'
+      fullPath: '/criar-empresa'
+      preLoaderRoute: typeof AuthenticatedCriarEmpresaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_auth/register': {
       id: '/_auth/register'
@@ -82,11 +187,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/_has-company': {
+      id: '/_authenticated/_has-company'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedHasCompanyRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/_has-company/produtos': {
+      id: '/_authenticated/_has-company/produtos'
+      path: '/produtos'
+      fullPath: '/produtos'
+      preLoaderRoute: typeof AuthenticatedHasCompanyProdutosRouteImport
+      parentRoute: typeof AuthenticatedHasCompanyRouteRoute
+    }
+    '/_authenticated/_has-company/planos': {
+      id: '/_authenticated/_has-company/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof AuthenticatedHasCompanyPlanosRouteImport
+      parentRoute: typeof AuthenticatedHasCompanyRouteRoute
+    }
+    '/_authenticated/_has-company/empresa': {
+      id: '/_authenticated/_has-company/empresa'
+      path: '/empresa'
+      fullPath: '/empresa'
+      preLoaderRoute: typeof AuthenticatedHasCompanyEmpresaRouteImport
+      parentRoute: typeof AuthenticatedHasCompanyRouteRoute
+    }
+    '/_authenticated/_has-company/dashboard': {
+      id: '/_authenticated/_has-company/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedHasCompanyDashboardRouteImport
+      parentRoute: typeof AuthenticatedHasCompanyRouteRoute
+    }
   }
 }
 
+interface AuthenticatedHasCompanyRouteRouteChildren {
+  AuthenticatedHasCompanyDashboardRoute: typeof AuthenticatedHasCompanyDashboardRoute
+  AuthenticatedHasCompanyEmpresaRoute: typeof AuthenticatedHasCompanyEmpresaRoute
+  AuthenticatedHasCompanyPlanosRoute: typeof AuthenticatedHasCompanyPlanosRoute
+  AuthenticatedHasCompanyProdutosRoute: typeof AuthenticatedHasCompanyProdutosRoute
+}
+
+const AuthenticatedHasCompanyRouteRouteChildren: AuthenticatedHasCompanyRouteRouteChildren =
+  {
+    AuthenticatedHasCompanyDashboardRoute:
+      AuthenticatedHasCompanyDashboardRoute,
+    AuthenticatedHasCompanyEmpresaRoute: AuthenticatedHasCompanyEmpresaRoute,
+    AuthenticatedHasCompanyPlanosRoute: AuthenticatedHasCompanyPlanosRoute,
+    AuthenticatedHasCompanyProdutosRoute: AuthenticatedHasCompanyProdutosRoute,
+  }
+
+const AuthenticatedHasCompanyRouteRouteWithChildren =
+  AuthenticatedHasCompanyRouteRoute._addFileChildren(
+    AuthenticatedHasCompanyRouteRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedHasCompanyRouteRoute: typeof AuthenticatedHasCompanyRouteRouteWithChildren
+  AuthenticatedCriarEmpresaRoute: typeof AuthenticatedCriarEmpresaRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedHasCompanyRouteRoute:
+    AuthenticatedHasCompanyRouteRouteWithChildren,
+  AuthenticatedCriarEmpresaRoute: AuthenticatedCriarEmpresaRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
 }
