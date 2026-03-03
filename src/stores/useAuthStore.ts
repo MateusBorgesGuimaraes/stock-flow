@@ -15,6 +15,8 @@ interface AuthState {
   setUser: (user: User) => void;
   clearUser: () => void;
   updateCompanyId: (companyId: string) => void;
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -22,6 +24,7 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       user: null,
       isAuthenticated: false,
+      _hasHydrated: false,
 
       setUser: (user) => set({ user, isAuthenticated: true }),
 
@@ -35,10 +38,20 @@ export const useAuthStore = create<AuthState>()(
         set((state) => ({
           user: state.user ? { ...state.user, companyId } : null,
         })),
+
+      setHasHydrated: (state) => {
+        set({ _hasHydrated: state });
+      },
     }),
     {
       name: "auth-storage",
-      partialize: (state) => ({ user: state.user }),
+      partialize: (state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+      }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     },
   ),
 );

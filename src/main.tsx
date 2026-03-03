@@ -9,6 +9,7 @@ import { setupInterceptors } from "./lib/axios-interceptors";
 import { useAuthStore } from "./stores/useAuthStore";
 import "./styles/reset.css";
 import "./styles/global.css";
+import { AuthGuard } from "./components/layout/authGuard";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,10 +28,12 @@ function App() {
   }, [clearUser]);
 
   return (
-    <ThemeProvider>
-      <Toaster position="top-right" richColors />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthGuard>
+      <ThemeProvider>
+        <Toaster position="top-right" richColors />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </AuthGuard>
   );
 }
 
