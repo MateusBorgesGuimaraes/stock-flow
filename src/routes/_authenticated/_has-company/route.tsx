@@ -2,7 +2,7 @@ import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { useAuthStore } from "../../../stores/useAuthStore";
 import Sidebar from "../../../components/layout/Sidebar";
 
-export const Route = createFileRoute("/(authenticated)/(has-company)")({
+export const Route = createFileRoute("/_authenticated/_has-company")({
   beforeLoad: () => {
     const { user } = useAuthStore.getState();
 
