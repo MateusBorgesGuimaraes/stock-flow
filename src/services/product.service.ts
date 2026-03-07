@@ -13,6 +13,11 @@ export interface Product {
   createdAt: string;
 }
 
+export interface UpdateStockDto {
+  quantity?: number;
+  adjustment?: number;
+}
+
 export interface ProductsResponse {
   data: Product[];
   meta: {
@@ -68,5 +73,10 @@ export async function deleteProduct(id: string) {
 
 export async function updateProduct(id: string, payload: ProductFormData) {
   const { data } = await api.patch(`/products/${id}`, payload);
+  return data;
+}
+
+export async function updateStock(id: string, dto: UpdateStockDto) {
+  const { data } = await api.patch(`/products/${id}/stock`, dto);
   return data;
 }

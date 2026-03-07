@@ -17,6 +17,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Table } from "../../../ui/table";
 import { buildProductColumns } from "./productColumns";
+import { StockModal } from "../../../ui/stockModal";
 
 const getStockStatus = (product: Product) => {
   if (product.quantity === 0) return "out";
@@ -48,6 +49,7 @@ export function Produtos() {
 
   const { mutate: deleteProduct } = useDeleteProduct();
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [stockProduct, setStockProduct] = useState<Product | null>(null);
 
   const handleDelete = (id: string) => {
     setDeletingId(id);
@@ -66,7 +68,11 @@ export function Produtos() {
       },
     });
   };
-  const columns = buildProductColumns(handleDelete, deletingId);
+  const columns = buildProductColumns(
+    handleDelete,
+    (product) => setStockProduct(product),
+    deletingId,
+  );
 
   return (
     <div className={styles.container}>
@@ -254,6 +260,12 @@ export function Produtos() {
             Próxima
           </button>
         </div>
+      )}
+      {stockProduct && (
+        <StockModal
+          product={stockProduct}
+          onClose={() => setStockProduct(null)}
+        />
       )}
     </div>
   );

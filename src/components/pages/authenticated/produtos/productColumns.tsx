@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Edit2, Package, Trash2 } from "lucide-react";
+import { Edit2, Package, Trash2, BarChart2 } from "lucide-react";
 import type { Product } from "../../../../services/product.service";
 import styles from "./styles.module.css";
 import type { Column } from "../../../ui/table";
@@ -45,18 +45,28 @@ function StockBadge({ product }: { product: Product }) {
 function ActionsCell({
   product,
   onDelete,
+  onUpdateStock,
   isDeleting,
 }: {
   product: Product;
   onDelete: (id: string) => void;
+  onUpdateStock: (product: Product) => void;
   isDeleting: boolean;
 }) {
   return (
     <div className={styles.actions}>
+      <button
+        className={styles.actionButton}
+        onClick={() => onUpdateStock(product)}
+        title="Atualizar estoque"
+      >
+        <BarChart2 size={16} />
+      </button>
       <Link
         to="/produtos/$id"
         params={{ id: product.id }}
         className={styles.actionButton}
+        title="Editar produto"
       >
         <Edit2 size={16} />
       </Link>
@@ -64,6 +74,7 @@ function ActionsCell({
         className={styles.actionButton}
         onClick={() => onDelete(product.id)}
         disabled={isDeleting}
+        title="Excluir produto"
       >
         <Trash2 size={16} />
       </button>
@@ -73,6 +84,7 @@ function ActionsCell({
 
 export function buildProductColumns(
   onDelete: (id: string) => void,
+  onUpdateStock: (product: Product) => void,
   deletingId: string | null,
 ): Column<Product>[] {
   return [
@@ -102,11 +114,12 @@ export function buildProductColumns(
     },
     {
       header: "",
-      width: "120px",
+      width: "130px",
       cell: (p) => (
         <ActionsCell
           product={p}
           onDelete={onDelete}
+          onUpdateStock={onUpdateStock}
           isDeleting={deletingId === p.id}
         />
       ),
