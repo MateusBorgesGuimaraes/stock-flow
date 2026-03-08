@@ -12,6 +12,9 @@ export function useUpdateStock(id: string) {
       toast.success("Estoque atualizado!");
       queryClient.invalidateQueries({ queryKey: ["products"] });
       queryClient.invalidateQueries({ queryKey: ["product", id] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-summary"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-stock-alerts"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-movements"] });
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

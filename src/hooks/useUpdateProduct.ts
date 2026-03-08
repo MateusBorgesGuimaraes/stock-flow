@@ -15,6 +15,9 @@ export function useUpdateProduct(id: string) {
       toast.success("Produto atualizado com sucesso!");
       queryClient.invalidateQueries({ queryKey: ["products"] });
       queryClient.invalidateQueries({ queryKey: ["product", id] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-summary"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-stock-alerts"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-movements"] });
       navigate({ to: "/produtos", search: { page: "1" } });
     },
     onError: (error) => {

@@ -13,6 +13,8 @@ export function useCreateProduct() {
     onSuccess: () => {
       toast.success("Produto criado com sucesso! 🎉");
       queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-summary"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-stock-alerts"] });
       navigate({
         to: "/produtos",
         search: { page: "1" },

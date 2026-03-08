@@ -18,17 +18,15 @@ import { toast } from "sonner";
 import { Table } from "../../../ui/table";
 import { buildProductColumns } from "./productColumns";
 import { StockModal } from "../../../ui/stockModal";
+import { useQuery } from "@tanstack/react-query";
+import { fetchSummary } from "../../../../services/dashboard.service";
+import { formatPrice } from "../../../../utils/formatPrice";
 
 const getStockStatus = (product: Product) => {
   if (product.quantity === 0) return "out";
   if (product.quantity <= product.lowStockThreshold) return "low";
   return "ok";
 };
-
-const formatPrice = (price: number) =>
-  new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(
-    price,
-  );
 
 export function Produtos() {
   const {
@@ -48,6 +46,10 @@ export function Produtos() {
   } = useProducts();
 
   const { mutate: deleteProduct } = useDeleteProduct();
+  const { data: summary } = useQuery({
+    queryKey: ["dashboard-summary"],
+    queryFn: fetchSummary,
+  });
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [stockProduct, setStockProduct] = useState<Product | null>(null);
 
@@ -68,6 +70,7 @@ export function Produtos() {
       },
     });
   };
+
   const columns = buildProductColumns(
     handleDelete,
     (product) => setStockProduct(product),
@@ -131,10 +134,7 @@ export function Produtos() {
           <div className={styles.statContent}>
             <span className={styles.statLabel}>Valor Total</span>
             <span className={styles.statValue}>
-              {formatPrice(
-                data?.data.reduce((acc, p) => acc + p.price * p.quantity, 0) ||
-                  0,
-              )}
+              {formatPrice(summary?.products.totalValue || 0)}
             </span>
           </div>
         </div>
