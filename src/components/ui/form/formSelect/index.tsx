@@ -1,5 +1,5 @@
 import type { FieldError, UseFormRegister } from "react-hook-form";
-import styles from "../formInput/styles.module.css";
+import styles from "./styles.module.css";
 
 interface Option {
   value: string;

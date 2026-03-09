@@ -15,7 +15,6 @@ export function useLogin() {
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
-      console.log("data", data);
       setUser(data.user);
       if (!data.user.companyId) {
         navigate({ to: "/criar-empresa" });
