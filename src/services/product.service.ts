@@ -11,6 +11,7 @@ export interface Product {
   category: string;
   sku: string;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface UpdateStockDto {

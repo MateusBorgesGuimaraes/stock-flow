@@ -1,0 +1,572 @@
+.container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.currentPlanCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  gap: 16px;
+}
+
+.currentPlanInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.currentPlanLabel {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+  margin: 0 0 2px;
+}
+
+.currentPlanName {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.currentPlanExpiry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.planCard {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: all 0.2s var(--ease);
+}
+
+.planCard:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.planCardCurrent {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-subtle);
+}
+
+.planCardPremium {
+  background: linear-gradient(
+    160deg,
+    var(--color-surface) 0%,
+    var(--color-warning-subtle) 100%
+  );
+  border-color: var(--color-warning);
+}
+
+.currentBadge,
+.popularBadge {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.currentBadge {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.popularBadge {
+  background: var(--color-warning);
+  color: var(--color-text-inverse);
+}
+
+.planCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.planIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.planIconFREE {
+  background: var(--color-surface-raised);
+  color: var(--color-text-secondary);
+}
+
+.planIconDELUXE {
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+
+.planIconPREMIUM {
+  background: var(--color-warning-subtle);
+  color: var(--color-warning);
+}
+
+.planName {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 4px;
+}
+
+.planPrice {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.featureList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.featureCheck {
+  color: var(--color-success);
+  flex-shrink: 0;
+}
+
+.planCardFooter {
+  padding-top: 4px;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cardHeaderIcon {
+  color: var(--color-primary);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.cardLoading,
+.cardEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  gap: 12px;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
+
+.cardEmpty p {
+  margin: 0;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.historyRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.15s var(--ease);
+}
+
+.historyRow:hover {
+  background: var(--color-surface-raised);
+}
+
+.historyIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--color-surface-raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.historyInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.historyPlan {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.historyDate {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+.historyMethod {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.historyAmount {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+
+.historyStatus {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 80px;
+  justify-content: flex-end;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 24px;
+}
+
+.modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: var(--shadow-xl, 0 20px 60px rgba(0, 0, 0, 0.3));
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.modalTitle {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 4px;
+}
+
+.modalSubtitle {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.modalClose {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s var(--ease);
+}
+
+.modalClose:hover {
+  background: var(--color-danger-subtle);
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--color-border);
+}
+
+.methodSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.methodLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.methodGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.methodBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.methodBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.methodBtnActive {
+  background: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.instructionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.instructionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.instructionTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.instructionNote {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  margin: 0;
+}
+
+.copyRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copyValue {
+  flex: 1;
+  font-size: 12px;
+  padding: 8px 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copyBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background: var(--color-primary-subtle);
+  border: 1px solid var(--color-primary);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s var(--ease);
+  flex-shrink: 0;
+}
+
+.copyBtn:hover {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.tokenRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.tokenLabel {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+.tokenValue {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .plansGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .currentPlanCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .historyMethod {
+    display: none;
+  }
+}

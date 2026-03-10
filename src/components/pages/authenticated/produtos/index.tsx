@@ -21,6 +21,7 @@ import { StockModal } from "../../../ui/stockModal";
 import { useQuery } from "@tanstack/react-query";
 import { fetchSummary } from "../../../../services/dashboard.service";
 import { formatPrice } from "../../../../utils/formatPrice";
+import { ExportButton } from "../../../ui/form/exportButton";
 
 const getStockStatus = (product: Product) => {
   if (product.quantity === 0) return "out";
@@ -86,10 +87,22 @@ export function Produtos() {
             Gerencie seu estoque e controle suas vendas
           </p>
         </div>
-        <Link to="/produtos/novo" className={styles.addButton}>
-          <Plus size={20} />
-          Novo Produto
-        </Link>
+        <div className={styles.btnsHeader}>
+          <Link to="/produtos/novo" className={styles.addButton}>
+            <Plus size={20} />
+            Novo Produto
+          </Link>
+
+          <ExportButton
+            params={{
+              search,
+              category,
+              lowStock: lowStockOnly ? "true" : undefined,
+              sortBy,
+              order,
+            }}
+          />
+        </div>
       </div>
       <div className={styles.stats}>
         <div className={styles.statCard}>
